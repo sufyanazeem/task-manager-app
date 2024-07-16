@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import GlobalStyleProvider from "@/providers/GlobalStyleProvider";
-import ContextProvider from "@/providers/ContextProvider";
+import ContextProvider from "./providers/ContextProvider";
+import GlobalStyleProvider from "./providers/GlobalStyleProvider";
+import Sidebar from "./components/Sidebar/Sidebar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function RootLayout({
         <ContextProvider>
           <GlobalStyleProvider>
             <Sidebar />
-            {children}
+            <div className="w-full">{children}</div>
           </GlobalStyleProvider>
         </ContextProvider>
       </body>
