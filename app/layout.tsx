@@ -5,6 +5,7 @@ import ContextProvider from "./providers/ContextProvider";
 import GlobalStyleProvider from "./providers/GlobalStyleProvider";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { auth, ClerkProvider} from "@clerk/nextjs";
+import ErrorBoundary from "@/ErrorBoundary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   const { userId } = auth();
   return (
     <ClerkProvider>
+      <ErrorBoundary>
     <html lang="en">
       <head>
         <link
@@ -34,12 +36,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <ContextProvider>
           <GlobalStyleProvider>
-            {userId && <Sidebar />}
+          {userId && <Sidebar />}
             <div className="w-full">{children}</div>
           </GlobalStyleProvider>
         </ContextProvider>
       </body>
     </html>
+    </ErrorBoundary>
     </ClerkProvider>
   );
 }
